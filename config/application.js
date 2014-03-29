@@ -12,39 +12,43 @@
  *   $ lineman config concat.js #=> to see the JS config for the concat task.
  */
 module.exports = function(lineman) {
-  //Override application configuration here. Common examples follow in the comments.
-  return {
+    //Override application configuration here. Common examples follow in the comments.
+    return {
+        loadNpmTasks: ['grunt-jsbeautifier'],
+        "jsbeautifier": {
+            files: ["app/**/*.js", "spec/**/*.js", "samples/**/*.js", "config/**/*.js"],
+            options: {}
+        }
+        // API Proxying
+        //
+        // During development, you'll likely want to make XHR (AJAX) requests to an API on the same
+        // port as your lineman development server. By enabling the API proxy and setting the port, all
+        // requests for paths that don't match a static asset in ./generated will be forwarded to
+        // whatever service might be running on the specified port.
+        //
+        // server: {
+        //   apiProxy: {
+        //     enabled: true,
+        //     host: 'localhost',
+        //     port: 3000
+        //   }
+        // }
 
-    // API Proxying
-    //
-    // During development, you'll likely want to make XHR (AJAX) requests to an API on the same
-    // port as your lineman development server. By enabling the API proxy and setting the port, all
-    // requests for paths that don't match a static asset in ./generated will be forwarded to
-    // whatever service might be running on the specified port.
-    //
-    // server: {
-    //   apiProxy: {
-    //     enabled: true,
-    //     host: 'localhost',
-    //     port: 3000
-    //   }
-    // }
+        // Sass
+        //
+        // Lineman supports Sass via grunt-contrib-sass, which requires you first
+        // have Ruby installed as well as the `sass` gem. To enable it, comment out the
+        // following line:
+        //
+        // enableSass: true
 
-    // Sass
-    //
-    // Lineman supports Sass via grunt-contrib-sass, which requires you first
-    // have Ruby installed as well as the `sass` gem. To enable it, comment out the
-    // following line:
-    //
-    // enableSass: true
+        // Asset Fingerprints
+        //
+        // Lineman can fingerprint your static assets by appending a hash to the filename
+        // and logging a manifest of logical-to-hashed filenames in dist/assets.json
+        // via grunt-asset-fingerprint
+        //
+        // enableAssetFingerprint: true
 
-    // Asset Fingerprints
-    //
-    // Lineman can fingerprint your static assets by appending a hash to the filename
-    // and logging a manifest of logical-to-hashed filenames in dist/assets.json
-    // via grunt-asset-fingerprint
-    //
-    // enableAssetFingerprint: true
-
-  };
+    };
 };
