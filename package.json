@@ -1,0 +1,14 @@
+{
+  "name": "ng-socket",
+  "description": "An angularjs wrapper for SockJS",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Nirandas Thavorath",
+  "devDependencies": {
+    "lineman": "~0.28.0"
+  },
+  "scripts": {
+    "start": "lineman run",
+    "test": "lineman spec-ci"
+  }
+}

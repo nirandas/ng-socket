@@ -1,0 +1,6 @@
+{
+  "name": "EchoServer",
+  "devDependencies": {
+"sockjs":"*"
+  }
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html >
+<head>
+<title>Test ng-socket</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+<script src="/ng-socket.js"></script>
+<script>
+function AppCtrl($scope, $socket){
+$scope.messages = [];
+
+$scope.start = function(){
+$socket.send("start", 400);
+};
+
+$socket.on("start",function(e, data){
+$scope.messages.push({event:"start", data:data});
+});
+}
+
+angular.module("app", ["ng-socket"])
+.config(function($socketProvider){
+$socketProvider.configure({
+address:"http://localhost:4949/echo",
+logger:function(e){
+alert(e);
+}
+});
+
+})
+.run(function($socket){
+$socket.start();
+})
+.controller("AppCtrl", AppCtrl);
+
+angular.element(document).ready(function(){
+angular.bootstrap( document, ["app"]);
+});
+</script>
+</head>
+<body ng-controller="AppCtrl">
+<p>Received messages:
+<ul>
+<li ng-repeat="m in messages">
+{{m.event}} : {{m.data}}
+</li>
+</ul>
+</p>
+
+<button ng-click="start()">Start</button>
+</body>
+</html>
