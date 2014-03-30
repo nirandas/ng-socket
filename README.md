@@ -1,6 +1,6 @@
-An angularjs wrapper for SockJS
+An AngularJS wrapper for SockJS
 
-##installation
+## Installation
 Include ng-socket as a dependency for your app
 
 	angular.module("your-app-name", [.... , "ng-socket", ....]);
@@ -25,7 +25,7 @@ Start the socket, mostly in your app's run block:
 
 Once configured and started, all received messages will be parsed according to the provided parser or using the default parser and broadcasted on $rootScope. ng-socket rate limits the broadcasts to twice a second and runs the $broadcast in a $apply function.
 
-###Subscribing
+### Subscribing
 
 To subscribe to received messages:
 
@@ -40,15 +40,15 @@ This is a shortcut to listening for the event on $rootScope. Optionally you coul
 	}, $scope);
 
 
-###Sending messages
+### Sending messages
 
 To send messages to the server:
 
 	$socket.send("event-name", data);
 
-##Parsers and Formatters
+## Parsers and Formatters
 
-ng-socket runs each received message through a parser function and each message to be sent through a formatter function. You could replace these function while configuring $socketProvider to implement your own messaging format. The default parser and formatter is defined as follows:
+The ng-socket runs each received message through a parser function and each message to be sent through a formatter function. You could replace these function while configuring $socketProvider to implement your own messaging format. The default parser and formatter is defined as follows:
 
 	function parser(msg){
 		return angular.fromJson(msg);
